@@ -18,7 +18,7 @@ export const validate = (input: any) => {
     },
   }
 
-  if (!/^[A-ZÑa-zñáéíóúÁÉÍÓÚ'° ]+$/.test(input.name)) {
+  if (!/^[A-ZÑa-zñáéíóúÁÉÍÓÚ'° ]+$/.test(input.Name)) {
     errors.Name.error = true
     errors.Name.Message = "Nombres no validos"
   }
