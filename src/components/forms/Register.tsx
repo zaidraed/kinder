@@ -65,7 +65,7 @@ export default function Register() {
       ...input,
       [event.target.name]: event.target.value,
     })
-    setErrors(validate(input))
+    setErrors(validate({ ...input, [event.target.name]: event.target.value }))
   }
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
@@ -94,25 +94,19 @@ export default function Register() {
           <Typography component="h1" variant="h5">
             Registrate
           </Typography>
-          <Box
-            component="form"
-            noValidate
-            onSubmit={handleSubmit}
-            sx={{ mt: 3 }}
-          >
+          <Box component="form" onSubmit={handleSubmit} sx={{ mt: 3 }}>
             <Grid container spacing={2}>
               <Grid item xs={12} sm={6}>
                 <TextField
-                  autoComplete="given-name"
                   name="Name"
                   required
                   fullWidth
                   helperText={errors.Name.Message}
                   error={errors.Name.error}
-                  id="Name"
                   label="Nombre"
                   value={input.Name}
                   onChange={handleChange}
+                  autoComplete="given-name"
                   autoFocus
                 />
               </Grid>
@@ -136,7 +130,6 @@ export default function Register() {
                   fullWidth
                   helperText={errors.email.Message}
                   error={errors.email.error}
-                  id="email"
                   label="Email"
                   name="email"
                   value={input.email}
@@ -153,7 +146,6 @@ export default function Register() {
                   name="password"
                   label="Contraseña"
                   type="password"
-                  id="password"
                   value={input.password}
                   onChange={handleChange}
                   autoComplete="new-password"
