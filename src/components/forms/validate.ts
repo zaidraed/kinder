@@ -16,6 +16,10 @@ export const validate = (input: any) => {
       error: false,
       Message: "",
     },
+    password2: {
+      error: false,
+      Message: "",
+    },
   }
 
   if (!/^[A-ZÑa-zñáéíóúÁÉÍÓÚ'° ]+$/.test(input.Name)) {
@@ -34,13 +38,9 @@ export const validate = (input: any) => {
     errors.email.error = true
     errors.email.Message = "ingrese un e-mail valido"
   }
-  if (
-    !/(?=(.*[0-9]))(?=.*[!@#$%^&*()\\[\]{}\-_+=|:;"'<>,./?])(?=.*[a-z])(?=(.*[A-Z]))(?=(.*)).{8,}/.test(
-      input.password,
-    )
-  ) {
-    errors.password.error = true
-    errors.password.Message = "Contraseña no valida"
+  if (input.password2 !== input.password) {
+    errors.password2.error = true
+    errors.password2.Message = "Contraseña no coinciden"
   }
 
   return errors

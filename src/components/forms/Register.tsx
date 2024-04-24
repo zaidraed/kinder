@@ -40,6 +40,7 @@ export default function Register() {
     lastName: "",
     email: "",
     password: "",
+    password2: "",
   })
   const [errors, setErrors] = useState({
     Name: {
@@ -58,6 +59,10 @@ export default function Register() {
       error: false,
       Message: "",
     },
+    password2: {
+      error: false,
+      Message: "",
+    },
   })
   const handleChange = (event: any) => {
     console.log(event.target.name)
@@ -69,10 +74,12 @@ export default function Register() {
   }
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
-    const data = new FormData(event.currentTarget)
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
+    setInput({
+      Name: "",
+      lastName: "",
+      email: "",
+      password: "",
+      password2: "",
     })
   }
 
@@ -151,12 +158,39 @@ export default function Register() {
                   autoComplete="new-password"
                 />
               </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  required
+                  fullWidth
+                  helperText={errors.password2.Message}
+                  error={errors.password2.error}
+                  name="password2"
+                  label="Repita la Contraseña"
+                  type="password"
+                  value={input.password2}
+                  onChange={handleChange}
+                  autoComplete="new-password"
+                />
+              </Grid>
             </Grid>
             <Button
               type="submit"
+              disabled={
+                !input.Name ||
+                !input.lastName ||
+                !input.email ||
+                !input.password ||
+                !input.password2 ||
+                errors.Name.error ||
+                errors.lastName.error ||
+                errors.email.error ||
+                errors.password.error ||
+                errors.password2.error
+              }
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
+              href="/login"
             >
               Registro
             </Button>
